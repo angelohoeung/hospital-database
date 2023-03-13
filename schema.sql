@@ -48,6 +48,7 @@ billing_ID VARCHAR(10) NOT NULL PRIMARY KEY,
 billing_amount INT NOT NULL,
 billing_date DATE NOT NULL,
 patient_ID VARCHAR(10) NOT NULL,
+hospital_ID INT NOT NULL,
 FOREIGN KEY (patient_ID) REFERENCES Patient(patient_ID),
 FOREIGN KEY (hospital_ID) REFERENCES Hospital(hospital_ID)
 );
@@ -105,10 +106,10 @@ VALUES ('N001', 'Jessica', 'Adams', 001),
 ('N002', 'Larry', 'Bond', 002),
 ('N003', 'Emily', 'Curry', 003);
 
-INSERT INTO Billing (billing_ID, billing_amount, billing_date, patient_ID)
-VALUES ('B001', 300, '2023-01-21', 'PT001'),
-('B002', 500, '2023-02-27', 'PT002'),
-('B003', 200, '2023-03-24', 'PT003');
+INSERT INTO Billing (billing_ID, billing_amount, billing_date, patient_ID, hospital_ID)
+VALUES ('B001', 300, '2023-01-21', 'PT001', 001),
+('B002', 500, '2023-02-27', 'PT002', 002),
+('B003', 200, '2023-03-24', 'PT003', 003);
 
 INSERT INTO Payment (payment_ID, payment_amount, payment_date, billing_ID)
 VALUES ('PY001', 300, '2023-01-25', 'B001'),
@@ -126,4 +127,4 @@ VALUES ('N001', 'PT001'),
 ('N003', 'PT003');
 
 --test
-SELECT * FROM Hospital;
+SELECT * FROM Hospital; 
