@@ -48,7 +48,8 @@ billing_ID VARCHAR(10) NOT NULL PRIMARY KEY,
 billing_amount INT NOT NULL,
 billing_date DATE NOT NULL,
 patient_ID VARCHAR(10) NOT NULL,
-FOREIGN KEY (patient_ID) REFERENCES Patient(patient_ID)
+FOREIGN KEY (patient_ID) REFERENCES Patient(patient_ID),
+FOREIGN KEY (hospital_ID) REFERENCES Hospital(hospital_ID)
 );
 
 CREATE TABLE Payment (
