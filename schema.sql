@@ -1,17 +1,20 @@
 -- SQL Schema for Hospital Database Management System – PM2
 -- Database Definitions
+--Table for Hospital, contains hospital ID, Name, Location. 
+--Primary Key can not be Null
 CREATE TABLE Hospital (
 hospital_ID INT NOT NULL PRIMARY KEY,
 hospital_name VARCHAR(40) NOT NULL,
 hospital_location VARCHAR(40) NOT NULL
 );
-
+--Table for Pharmacy with same attributes as Hospital but for Pharmacy
 CREATE TABLE Pharmacy (
 pharmacy_ID VARCHAR(10) NOT NULL PRIMARY KEY,
 pharmacy_name VARCHAR(40) NOT NULL,
 pharmacy_location VARCHAR(40) NOT NULL
 );
-
+-- Table for Patient, stored important info about check-in date/ check out date, personal information, condition, treatment and many others
+-- Also has foreign key from Hospital Table
 CREATE TABLE Patient (
 patient_ID VARCHAR(10) NOT NULL PRIMARY KEY,
 patient_firstname VARCHAR(25) NOT NULL,
@@ -26,7 +29,7 @@ patient_checkoutdate DATE,
 hospital_ID INT NOT NULL,
 FOREIGN KEY (hospital_ID) REFERENCES Hospital(hospital_ID)
 );
-
+-- uses foreign key hospital ID from Hospital Table
 CREATE TABLE Doctor (
 doctor_ID VARCHAR(10) NOT NULL PRIMARY KEY,
 doctor_firstname VARCHAR(25) NOT NULL,
@@ -42,7 +45,7 @@ nurse_lastname VARCHAR(25) NOT NULL,
 hospital_ID INT NOT NULL,
 FOREIGN KEY (hospital_ID) REFERENCES Hospital(hospital_ID)
 );
-
+-- Used two foreign keys, patient ID from Patient and hospital ID from Hospital
 CREATE TABLE Billing (
 billing_ID VARCHAR(10) NOT NULL PRIMARY KEY,
 billing_amount INT NOT NULL,
@@ -72,6 +75,8 @@ FOREIGN KEY (patient_ID) REFERENCES Patient(patient_ID)
 );
 
 -- Which nurses treat which patients
+-- uses two foreign keys, nurse ID, patient ID. from Nurse Table and Patient Table respectively
+--
 CREATE TABLE Patients_Nurses (
 nurse_ID VARCHAR(10) NOT NULL,
 patient_ID VARCHAR(10) NOT NULL,
