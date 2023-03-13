@@ -1,5 +1,5 @@
---SQL Schema for Hospital Database Management System – PM2
---Database Definitions
+-- SQL Schema for Hospital Database Management System – PM2
+-- Database Definitions
 CREATE TABLE Hospital (
 hospital_ID INT NOT NULL PRIMARY KEY,
 hospital_name VARCHAR(40) NOT NULL,
@@ -22,7 +22,7 @@ patient_phonenumber VARCHAR(15) NOT NULL,
 patient_condition VARCHAR(40) NOT NULL,
 patient_treatment VARCHAR(40) NOT NULL,
 patient_checkindate DATE NOT NULL,
-patient_checkoutdate DATE NOT NULL,
+patient_checkoutdate DATE,
 hospital_ID INT NOT NULL,
 FOREIGN KEY (hospital_ID) REFERENCES Hospital(hospital_ID)
 );
@@ -47,7 +47,7 @@ CREATE TABLE Billing (
 billing_ID VARCHAR(10) NOT NULL PRIMARY KEY,
 billing_amount INT NOT NULL,
 billing_date DATE NOT NULL,
-patient_ID INT NOT NULL,
+patient_ID VARCHAR(10) NOT NULL,
 FOREIGN KEY (patient_ID) REFERENCES Patient(patient_ID)
 );
 
@@ -55,8 +55,27 @@ CREATE TABLE Payment (
 payment_ID VARCHAR(10) NOT NULL PRIMARY KEY,
 payment_amount INT NOT NULL,
 payment_date DATE NOT NULL,
-billing_ID INT NOT NULL,
+billing_ID VARCHAR(10) NOT NULL,
 FOREIGN KEY (billing_ID) REFERENCES Billing(billing_ID)
+);
+
+-- Which doctors treat which patients
+CREATE TABLE Patients_Doctors (
+doctor_ID VARCHAR(10) NOT NULL,
+patient_ID VARCHAR(10) NOT NULL,
+is_primary BIT NOT NULL, -- Is primary doctor?
+PRIMARY KEY (doctor_ID, patient_ID),
+FOREIGN KEY (doctor_ID) REFERENCES Doctor(doctor_ID),
+FOREIGN KEY (patient_ID) REFERENCES Patient(patient_ID)
+);
+
+-- Which nurses treat which patients
+CREATE TABLE Patients_Nurses (
+nurse_ID VARCHAR(10) NOT NULL,
+patient_ID VARCHAR(10) NOT NULL,
+PRIMARY KEY (nurse_ID, patient_ID),
+FOREIGN KEY (nurse_ID) REFERENCES Nurse(nurse_ID),
+FOREIGN KEY (patient_ID) REFERENCES Patient(patient_ID)
 );
 
 -- Insert Queries
@@ -86,14 +105,24 @@ VALUES ('N001', 'Jessica', 'Adams', 001),
 ('N003', 'Emily', 'Curry', 003);
 
 INSERT INTO Billing (billing_ID, billing_amount, billing_date, patient_ID)
-VALUES ('B001', 300, '2023-01-21', 001),
-('B002', 500, '2023-02-27', 002),
-('B003', 200, '2023-03-24', 003);
+VALUES ('B001', 300, '2023-01-21', 'PT001'),
+('B002', 500, '2023-02-27', 'PT002'),
+('B003', 200, '2023-03-24', 'PT003');
 
 INSERT INTO Payment (payment_ID, payment_amount, payment_date, billing_ID)
-VALUES ('PY001', 300, '2023-01-25', 001),
-('PY002', 500, '2023-02-28', 002),
-('PY003', 200, '2023-03-29', 003);
+VALUES ('PY001', 300, '2023-01-25', 'B001'),
+('PY002', 500, '2023-02-28', 'B002'),
+('PY003', 200, '2023-03-29', 'B003');
+
+INSERT INTO Patients_Doctors (doctor_ID, patient_ID, is_primary)
+VALUES ('D001', 'PT001', 1),
+('D002', 'PT002', 1),
+('D003', 'PT003', 1);
+
+INSERT INTO Patients_Nurses (nurse_ID, patient_ID)
+VALUES ('N001', 'PT001'),
+('N002', 'PT002'),
+('N003', 'PT003');
 
 --test
 SELECT * FROM Hospital;
