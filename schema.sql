@@ -1,6 +1,7 @@
--- SQL Schema for Hospital Database Management System – PM2
+-- SQL Schema for Hospital Database Management System
+
 -- Database Definitions
---Table for Hospital, contains hospital ID, Name, Location. 
+--Table for Hospital, contains hospital ID, Name, Location.
 --Primary Key can not be Null
 CREATE TABLE Hospital (
 hospital_ID INT NOT NULL PRIMARY KEY,
@@ -29,22 +30,23 @@ patient_checkoutdate DATE,
 hospital_ID INT NOT NULL,
 FOREIGN KEY (hospital_ID) REFERENCES Hospital(hospital_ID)
 );
--- uses foreign key hospital ID from Hospital Table
+-- uses foreign key locations ID from Locations Table
 CREATE TABLE Doctor (
 doctor_ID VARCHAR(10) NOT NULL PRIMARY KEY,
 doctor_firstname VARCHAR(25) NOT NULL,
 doctor_lastname VARCHAR(25) NOT NULL,
-hospital_ID INT NOT NULL,
-FOREIGN KEY (hospital_ID) REFERENCES Hospital(hospital_ID)
+location_ID INT NOT NULL,
+FOREIGN KEY (location_ID) REFERENCES Locations(location_ID)
 );
 
 CREATE TABLE Nurse (
 nurse_ID VARCHAR(10) NOT NULL PRIMARY KEY,
 nurse_firstname VARCHAR(25) NOT NULL,
 nurse_lastname VARCHAR(25) NOT NULL,
-hospital_ID INT NOT NULL,
-FOREIGN KEY (hospital_ID) REFERENCES Hospital(hospital_ID)
+location_ID INT NOT NULL,
+FOREIGN KEY (location_ID) REFERENCES Locations(location_ID)
 );
+
 -- Used two foreign keys, patient ID from Patient and hospital ID from Hospital
 CREATE TABLE Billing (
 billing_ID VARCHAR(10) NOT NULL PRIMARY KEY,
@@ -85,6 +87,13 @@ FOREIGN KEY (nurse_ID) REFERENCES Nurse(nurse_ID),
 FOREIGN KEY (patient_ID) REFERENCES Patient(patient_ID)
 );
 
+CREATE TABLE Locations (
+	location_ID INT NOT NULL PRIMARY KEY,
+	branch_name VARCHAR(40) NOT NULL,
+	hospital_ID INT NOT NULL,
+	FOREIGN KEY (hospital_ID) REFERENCES Hospital(hospital_ID)
+);
+
 -- Insert Queries
 INSERT INTO Hospital (hospital_ID, hospital_name, hospital_location)
 VALUES (001, 'Windsor Central Hospital ', '110 Ouellette Ave.'),
@@ -94,19 +103,19 @@ VALUES (001, 'Windsor Central Hospital ', '110 Ouellette Ave.'),
 INSERT INTO Pharmacy (pharmacy_ID, pharmacy_name, pharmacy_location)
 VALUES ('PH001', 'Windsor Central Pharmacy', '112 Ouellette Ave.'),
 ('PH002', 'Windsor East Pharmacy', '152 Wyandotte Rd.'),
-('PH003', 'Windsor West Pharmacy', '952 Wyandotte Rd.'); 
+('PH003', 'Windsor West Pharmacy', '952 Wyandotte Rd.');
 
 INSERT INTO Patient (patient_ID, patient_firstname, patient_lastname, patient_address, patient_DOB, patient_phonenumber, patient_condition, patient_treatment, patient_checkindate, patient_checkoutdate, hospital_ID)
 VALUES ('PT001', 'Joe', 'Douglas', '110 Abbott St.', '1994-05-21', '519-456-2094', 'Flu', 'Take Tylenol and Rest', '2023-01-15', '2023-01-20', 001),
 ('PT002', 'Jane', 'Wong', '220 Oak Ave.', '2005-06-30', '519-654-2005', 'Diabetes', 'Take Insulin', '2023-02-25', '2023-02-26', 002),
 ('PT003', 'Derek', 'Hopper', '330 Kennedy Rd.', '1987-12-17', '519-580-2087', 'Laryngitis', 'Drink Fluids and Rest', '2023-03-20', '2023-03-23', 003);
 
-INSERT INTO Doctor (doctor_ID, doctor_firstname, doctor_lastname, hospital_ID)
+INSERT INTO Doctor (doctor_ID, doctor_firstname, doctor_lastname, location_ID)
 VALUES ('D001', 'John', 'Smith', 001),
 ('D002', 'Sarah', 'Lopez', 002),
 ('D003', 'Mike', 'Jones', 003);
 
-INSERT INTO Nurse (nurse_ID, nurse_firstname, nurse_lastname, hospital_ID)
+INSERT INTO Nurse (nurse_ID, nurse_firstname, nurse_lastname, location_ID)
 VALUES ('N001', 'Jessica', 'Adams', 001),
 ('N002', 'Larry', 'Bond', 002),
 ('N003', 'Emily', 'Curry', 003);
@@ -131,5 +140,14 @@ VALUES ('N001', 'PT001'),
 ('N002', 'PT002'),
 ('N003', 'PT003');
 
+INSERT INTO Locations (location_ID, branch_name, hospital_ID)
+VALUES (001, 'Emergency', 001),
+(002, 'Intensive Care Unit', 001),
+(003, 'Paediatrics', 002),
+(004, 'Cardiology', 002),
+(005, 'Orthopaedics', 003),
+(006, 'Psychiatry', 003);
+
 --test
-SELECT * FROM Hospital; 
+--SELECT * FROM Hospital;
+SELECT * FROM Locations;
