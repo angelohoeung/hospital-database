@@ -147,7 +147,3 @@ VALUES (001, 'Emergency', 001),
 (004, 'Cardiology', 002),
 (005, 'Orthopaedics', 003),
 (006, 'Psychiatry', 003);
-
---test
---SELECT * FROM Hospital;
-SELECT * FROM Locations;
