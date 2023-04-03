@@ -22,4 +22,4 @@ Then, navigate to the project directory, execute App.py, and open [http://127.0.
 ## Screenshots
 
 \*Styling and other elements are in the works\*\
-![Frontpage](screenshots/frontpage.png)
+![Frontpage](/screenshots/frontpage.png)
