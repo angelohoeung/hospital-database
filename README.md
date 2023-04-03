@@ -17,7 +17,7 @@ Install Flask:
 pip install flask
 ```
 
-Then, navigate to the project directory, execute app.py, and open [http://127.0.0.1:5000](http://127.0.0.1:5000) to view it in the browser.
+Then, navigate to comp3150-hospital-database/src, execute app.py, and open [http://127.0.0.1:5000](http://127.0.0.1:5000) to view it in the browser.
 
 ## Screenshots
 
