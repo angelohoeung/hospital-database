@@ -1,8 +1,7 @@
-<!-- home.html -->
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hospital Database</title>
     <link
       rel="stylesheet"
@@ -24,27 +23,28 @@
       <input type="submit" value="Execute" />
     </form>
     {% if error %}
-    <div class="error">{{ error }}</div>
-    {% endif %} {% if results %}
-    <h2>Results:</h2>
-    <table>
-      <thead>
-        <tr>
-          {% for column_name in column_names %}
-          <th>{{ column_name }}</th>
+      <div class="error">{{ error }}</div>
+    {% endif %}
+    {% if results %}
+      <h2>Results:</h2>
+      <table>
+        <thead>
+          <tr>
+            {% for column_name in column_names %}
+              <th>{{ column_name }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for result in results %}
+            <tr>
+              {% for column in result %}
+                <td>{{ column }}</td>
+              {% endfor %}
+            </tr>
           {% endfor %}
-        </tr>
-      </thead>
-      <tbody>
-        {% for result in results %}
-        <tr>
-          {% for column in result %}
-          <td>{{ column }}</td>
-          {% endfor %}
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
     {% endif %}
   </body>
 </html>

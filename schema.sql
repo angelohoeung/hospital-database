@@ -1,5 +1,17 @@
 -- SQL Schema for Hospital Database Management System
 
+-- Drop tables
+DROP TABLE IF EXISTS Locations;
+DROP TABLE IF EXISTS Patients_Nurses;
+DROP TABLE IF EXISTS Patients_Doctors;
+DROP TABLE IF EXISTS Payment;
+DROP TABLE IF EXISTS Billing;
+DROP TABLE IF EXISTS Nurse;
+DROP TABLE IF EXISTS Doctor;
+DROP TABLE IF EXISTS Patient;
+DROP TABLE IF EXISTS Pharmacy;
+DROP TABLE IF EXISTS Hospital;
+
 -- Database Definitions
 --Table for Hospital, contains hospital ID, Name, Location.
 --Primary Key can not be Null

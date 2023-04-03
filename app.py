@@ -3,9 +3,17 @@ import sqlite3
 
 app = Flask(__name__)
 
-# Define a route for the home page and the SQL query page
+# read SQL queries from file
+with open('schema.sql', 'r') as f:
+    sql_queries = f.read()
 
+# create new database and execute queries
+connection = sqlite3.connect('schema.db')
+cursor = connection.cursor()
+cursor.executescript(sql_queries)
+connection.commit()
 
+# Define a route for the home page
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
@@ -15,8 +23,7 @@ def home():
             cursor = connection.cursor()
             cursor.execute(query_text)
             results = cursor.fetchall()
-            column_names = [description[0]
-                            for description in cursor.description]
+            column_names = [description[0] for description in cursor.description]
             connection.close()
             return render_template('index.html', results=results, column_names=column_names, query_text=query_text, error=None)
         except Exception as e:
