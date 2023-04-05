@@ -1,7 +1,7 @@
---Query 2: Send Error message/trigger warning when Patient's date of check-in is chronological and valid after their check-out date
---'trigger_validchronDate' is the trigger used to validate a given patient date of hospital check-in when a tuple is newly inputted within table of "Patient"
---If a given patient's date of check-in is after ('greater than') their check-out, then a trigger will be thus raised (as it should only be before or on the check-out date)
---The raised trigger will give a message of error that the patient's check-in date should be before the check-out date 
+-- Query 2: Send Error message/trigger warning when Patient's date of check-in is chronological and valid after their check-out date
+-- 'trigger_validchronDate' is the trigger used to validate a given patient date of hospital check-in when a tuple is newly inputted within table of "Patient"
+-- If a given patient's date of check-in is after ('greater than') their check-out, then a trigger will be thus raised (as it should only be before or on the check-out date)
+-- The raised trigger will give a message of error that the patient's check-in date should be before the check-out date 
 
 CREATE TRIGGER trigger_validchronDate BEFORE INSERT ON Patient
 WHEN patient_checkindate > patient_checkoutdate
