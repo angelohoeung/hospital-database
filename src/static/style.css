@@ -78,6 +78,8 @@ input[type="submit"] {
   background-color: #333;
   cursor: pointer;
   transition: border-color 0.25s;
+  text-align: left;
+  margin-top: 5px;
 }
 
 button:hover,
@@ -90,10 +92,6 @@ button:focus-visible,
 input[type="submit"]:focus,
 input[type="submit"]:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-input[type="submit"] {
-  margin-top: 5px;
 }
 
 .error {
