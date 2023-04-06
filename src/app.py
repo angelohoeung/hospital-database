@@ -34,11 +34,11 @@ GROUP BY hospital.hospital_name;""",
 -- The raised trigger will give a message of error that the patient's check-in date should be before the check-out date 
 
 CREATE TRIGGER trigger_validchronDate BEFORE INSERT ON Patient
-WHEN patient_checkindate > patient_checkoutdate
+FOR EACH ROW
+WHEN NEW.patient_checkindate > NEW.patient_checkoutdate
 BEGIN
-SELECT RAISE(ABORT, 'Error: The patient should check-in on a date that is identical to or before the date they checked out!');
-END;"""
-}
+    SELECT RAISE(ABORT, 'Error: The patient should check-in on a date that is identical to or before the date they checked out!');
+END;"""}
     if request.method == 'POST':
         query_text = request.form['query_text']
         try:
