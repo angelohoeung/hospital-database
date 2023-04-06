@@ -8,7 +8,7 @@
 
 ## Overview
 
-This project has been created in SQLite 3.39.4. The backend has been created in Flask (Python 3.11).
+This project has been created in SQLite 3.39.4. The backend has been created in Flask 2.2.3 (Python 3.11.1).
 
 ## Running
 Install Flask:

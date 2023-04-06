@@ -7,4 +7,4 @@ CREATE TRIGGER trigger_validchronDate BEFORE INSERT ON Patient
 WHEN patient_checkindate > patient_checkoutdate
 BEGIN
 SELECT RAISE(ABORT, 'Error: The patient should check-in on a date that is identical to or before the date they checked out!');
-END; 
+END;

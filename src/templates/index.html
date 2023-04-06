@@ -3,6 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hospital Database</title>
+    <link rel="shortcut icon" href="#">
     <link
       rel="stylesheet"
       type="text/css"
@@ -16,39 +17,41 @@
       </ul>
     </nav>
     <h1>Hospital Database</h1>
-    <h2>Enter an SQLite query:</h2>
-    <form method="POST">
-      <textarea name="query_text" rows="5" placeholder="SELECT * FROM Hospital;">{% if query_text %}{{ query_text }}{% endif %}</textarea>
-      <br />
-      {% for text, query in query_dict.items() %}
-        <button type="button" onclick="document.getElementsByName('query_text')[0].value = `{{ query }}`">{{ text }}</button>
-      {% endfor %}
-      <br />
-      <input type="submit" value="Execute" />
-    </form>
-    {% if error %}
-      <div class="error">{{ error }}</div>
-    {% endif %}
-    {% if results %}
-      <h2>Results:</h2>
-      <table>
-        <thead>
-          <tr>
-            {% for column_name in column_names %}
-              <th>{{ column_name }}</th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          {% for result in results %}
+    <div class="content">
+      <h2>Enter an SQLite query:</h2>
+      <form method="POST">
+        <textarea name="query_text" rows="5" placeholder="SELECT * FROM Hospital;">{% if query_text %}{{ query_text }}{% endif %}</textarea>
+        <br />
+        {% for text, query in query_dict.items() %}
+          <button type="button" onclick="document.getElementsByName('query_text')[0].value = `{{ query }}`">{{ text }}</button>
+        {% endfor %}
+        <br />
+        <input type="submit" value="Execute" />
+      </form>
+      {% if error %}
+        <div class="error">{{ error }}</div>
+      {% endif %}
+      {% if results %}
+        <h2>Results:</h2>
+        <table>
+          <thead>
             <tr>
-              {% for column in result %}
-                <td>{{ column }}</td>
+              {% for column_name in column_names %}
+                <th>{{ column_name }}</th>
               {% endfor %}
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    {% endif %}
+          </thead>
+          <tbody>
+            {% for result in results %}
+              <tr>
+                {% for column in result %}
+                  <td>{{ column }}</td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+    </div>
   </body>
 </html>
