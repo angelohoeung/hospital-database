@@ -8,18 +8,35 @@
 
 ## Overview
 
-This project has been created in SQLite 3.39.4. The backend has been created in Flask 2.2.3 (Python 3.11.1).
+Hospital database management project made in SQLite and Flask.
 
 ## Running
 
-Install Flask:
+On Windows:
 
-```
-pip install flask
+```bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python src/app.py
 ```
 
-Then, navigate to comp3150-hospital-database/src, execute app.py, and open [http://127.0.0.1:5000](http://127.0.0.1:5000) to view it in the browser.
-_Note: Trigger doesn't currently work on the website, you must test it using SQLite itself._
+On macOS/Linux:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python3 src/app.py
+```
+
+Then, go to [http://127.0.0.1:5000](http://127.0.0.1:5000) to view it in the browser.
+
+To deactivate venv:
+
+```bash
+deactivate
+```
 
 ## Screenshots
 
